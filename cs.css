@@ -1,0 +1,205 @@
+/* === GLOBAL LAYOUT === */
+body {
+  background: linear-gradient(-45deg, #1e1e1e, #121212, #1e1e1e);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #f2f2f2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body.light-theme {
+  background: #f5f5f5;
+  color: #222;
+  animation: none;
+}
+
+/* === INPUTS / TEXTAREAS / BUTTONS === */
+input, textarea, button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #333;
+  background: #1c1c1c;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+input:focus, textarea:focus {
+  border-color: #00ffc3;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 255, 195, 0.5);
+}
+
+button {
+  background: #00ffc3;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: #00e6b0;
+}
+
+body.light-theme input,
+body.light-theme textarea,
+body.light-theme button {
+  background: #fff;
+  color: #000;
+  border-color: #ccc;
+}
+
+body.light-theme button:hover {
+  background: #00b37e;
+}
+
+/* === NAVIGATION === */
+#mainNav {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #222;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.light-theme #mainNav {
+  background: #ddd;
+}
+
+#mainNav button {
+  flex: 1 1 120px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* === POSTS === */
+.post-feed {
+  margin-top: 2rem;
+}
+
+.post {
+  background: #181818;
+  border: 1px solid #444;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.post:hover {
+  transform: scale(1.01);
+  background: #202020;
+}
+
+body.light-theme .post {
+  background: #fff;
+  border-color: #ccc;
+}
+
+body.light-theme .post:hover {
+  background: #f2f2f2;
+}
+
+/* === COMMENTS === */
+.comments {
+  font-size: 0.95rem;
+  color: #ccc;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  max-height: 150px;
+  overflow-y: auto;
+  border-left: 2px solid #333;
+}
+
+body.light-theme .comments {
+  color: #555;
+  border-color: #bbb;
+}
+
+.comment-box input {
+  margin-top: 0.75rem;
+  border-radius: 8px;
+}
+
+/* === STATUS BAR === */
+.status-bar {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+body.light-theme .status-bar {
+  background: #eaeaea;
+  color: #000;
+  border-color: #bbb;
+}
+
+/* === VIDEO POST === */
+.video-post {
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.video-post iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 600px) {
+  body {
+    margin: 1rem;
+  }
+
+  #mainNav {
+    flex-direction: column;
+  }
+
+  .video-post iframe {
+    height: 200px;
+  }
+}
+/* Events */
+.event-card {
+  background: #222;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+body.light-theme .event-card {
+  background: #f9f9f9;
+  color: #000;
+  border-color: #ccc;
+}
