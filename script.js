@@ -54,6 +54,30 @@
   </section>
 
   <!-- Home Page -->
+  async function submitPost() {
+  const contentEl = document.getElementById("postContent");
+  const content = contentEl?.value.trim();
+  if (!content) return;
+
+  // 🔮 Generate thumbnail based on post content
+  const thumbnail = await generateAnimeThumbnail(content);
+
+  const newPost = {
+    id: Date.now(),
+    author: currentUser,
+    avatar: currentAvatar,
+    message: sanitizeText(content),
+    timestamp: new Date().toISOString(),
+    likes: 0,
+    likedBy: [],
+    comments: [],
+    thumbnail // 👈 Save generated anime thumbnail
+  };
+
+  posts.unshift(newPost);
+  saveAndRender();
+  contentEl.value = "";
+}
   <section id="homePage" class="page hidden">
     <div id="postSection">
       <h2>📝 Create Post</h2>
