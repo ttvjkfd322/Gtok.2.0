@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gtok 🌸 Social Site</title>
 
-  <!-- Anime font -->
-  <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet" />
-  <!-- Main CSS -->
+  <!-- Trendy Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- (Optional) Sakura Petals -->
+  <!-- Sakura Petals (Optional) -->
   <script src="https://unpkg.com/sakura-js" defer></script>
   <script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -22,7 +23,7 @@
 
   <!-- Header -->
   <header>
-    <h1 style="text-align: center; font-size: 2.2rem;">🌸 SecurePost</h1>
+    <h1>🌸 Gtok Social</h1>
     <div id="userStatus" class="status-bar">Not logged in</div>
   </header>
 
@@ -33,7 +34,7 @@
     <button onclick="showPage('settings')">⚙️ Settings</button>
   </nav>
 
-  <!-- Auth Section -->
+  <!-- Authentication -->
   <section id="authSection">
     <h2>✨ Login or Sign Up</h2>
     <input type="text" id="usernameInput" placeholder="Username" autocomplete="username" />
@@ -60,7 +61,7 @@
       <div id="pagination"></div>
     </div>
 
-    <div id="videoPostSection" style="margin-top: 2rem;">
+    <div id="videoPostSection">
       <h2>🎥 Post a Video Link</h2>
       <textarea id="videoUrl" placeholder="Paste YouTube or Vimeo link here" rows="2"></textarea>
       <button onclick="postVideo()">Post Video</button>
@@ -100,13 +101,13 @@
     <p id="settingsMessage"></p>
   </section>
 
-  <!-- Events Section -->
+  <!-- Events Page -->
   <section id="eventSection" class="hidden">
     <h2>📅 Upcoming Events</h2>
     <div id="eventFeed"></div>
   </section>
 
-  <!-- Create Event (Admin Only) -->
+  <!-- Create Event (Admin only) -->
   <section id="createEventSection" class="hidden">
     <h2>🎉 Create New Event</h2>
     <input type="text" id="eventTitleInput" placeholder="Event Title" />
@@ -115,7 +116,7 @@
     <button onclick="submitEvent()">Create Event</button>
   </section>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script src="script.js" defer></script>
   <script>
     function postVideo() {
