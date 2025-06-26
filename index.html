@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-async function fetchAnimeThumbnail() {
-  try {
-    const res = await fetch('https://api.pic.re/'); // Pic.re random anime image API
-    if (!res.ok) throw new Error('Network response not ok ' + res.status);
-    const blob = await res.blob();
-    return URL.createObjectURL(blob); // Temporary local URL
-  } catch (err) {
-    console.error("🌀 Thumbnail fetch error:", err);
-    return 'fallback-thumbnail.jpg'; // Fallback image
-  }
-}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gtok 🌸 Social Site</title>
@@ -132,8 +121,10 @@ async function fetchAnimeThumbnail() {
     <button onclick="submitEvent()">Create Event</button>
   </section>
 
-  <!-- Scripts -->
+  <!-- Main Script -->
   <script src="script.js" defer></script>
+
+  <!-- Video Posting Script -->
   <script>
     function postVideo() {
       const url = document.getElementById("videoUrl").value.trim();
