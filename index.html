@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SecurePost Social Site</title>
+  <title>Gtok 🌸 Social Site</title>
+
+  <!-- Anime font -->
+  <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet" />
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Minimal video post styles (you can move to style.css) */
-    .video-post {
-      margin: 1rem 0;
-    }
-    .video-post iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-    }
-  </style>
+
+  <!-- (Optional) Sakura Petals -->
+  <script src="https://unpkg.com/sakura-js" defer></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      new Sakura('body');
+    });
+  </script>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <h1>SecurePost 🧑‍💻</h1>
+    <h1 style="text-align: center; font-size: 2.2rem;">🌸 SecurePost</h1>
     <div id="userStatus" class="status-bar">Not logged in</div>
   </header>
 
@@ -31,9 +33,9 @@
     <button onclick="showPage('settings')">⚙️ Settings</button>
   </nav>
 
-  <!-- LOGIN/SIGNUP FORM -->
+  <!-- Auth Section -->
   <section id="authSection">
-    <h2>Login or Sign Up</h2>
+    <h2>✨ Login or Sign Up</h2>
     <input type="text" id="usernameInput" placeholder="Username" autocomplete="username" />
     <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password" />
     <div>
@@ -46,20 +48,20 @@
   <!-- Home Page -->
   <section id="homePage" class="page hidden">
     <div id="postSection">
-      <h2>Create Post</h2>
-      <textarea id="postContent" placeholder="What's on your mind?" rows="3" maxlength="280"></textarea>
+      <h2>📝 Create Post</h2>
+      <textarea id="postContent" placeholder="What's on your mind, senpai?" rows="3" maxlength="280"></textarea>
       <button onclick="submitPost()">Post</button>
     </div>
 
     <div id="feedSection">
-      <h2>Public Feed</h2>
+      <h2>🌍 Public Feed</h2>
       <input type="text" id="filterInput" placeholder="Filter posts..." oninput="filterPosts()" />
       <div id="postFeed" class="post-feed"></div>
       <div id="pagination"></div>
     </div>
 
     <div id="videoPostSection" style="margin-top: 2rem;">
-      <h2>Post a Video Link (YouTube or Vimeo)</h2>
+      <h2>🎥 Post a Video Link</h2>
       <textarea id="videoUrl" placeholder="Paste YouTube or Vimeo link here" rows="2"></textarea>
       <button onclick="postVideo()">Post Video</button>
       <div id="videoFeed"></div>
@@ -68,8 +70,8 @@
 
   <!-- Profile Page -->
   <section id="profilePage" class="page hidden">
-    <h2>Your Profile</h2>
-    <p>Profile info coming soon...</p>
+    <h2>👘 Your Profile</h2>
+    <p>Profile info coming soon... maybe your anime watchlist too?</p>
   </section>
 
   <!-- Settings Page -->
@@ -98,25 +100,24 @@
     <p id="settingsMessage"></p>
   </section>
 
-  <!-- EVENTS SECTION -->
+  <!-- Events Section -->
   <section id="eventSection" class="hidden">
-    <h2>Upcoming Events</h2>
+    <h2>📅 Upcoming Events</h2>
     <div id="eventFeed"></div>
   </section>
 
-  <!-- ADMIN-ONLY: CREATE EVENT FORM -->
+  <!-- Create Event (Admin Only) -->
   <section id="createEventSection" class="hidden">
-    <h2>Create New Event</h2>
+    <h2>🎉 Create New Event</h2>
     <input type="text" id="eventTitleInput" placeholder="Event Title" />
     <textarea id="eventDescInput" placeholder="Event Description"></textarea>
     <input type="datetime-local" id="eventDateInput" />
     <button onclick="submitEvent()">Create Event</button>
   </section>
 
+  <!-- Script -->
   <script src="script.js" defer></script>
-
   <script>
-    // Video post helper functions
     function postVideo() {
       const url = document.getElementById("videoUrl").value.trim();
       if (!url) {
@@ -160,6 +161,5 @@
       return null;
     }
   </script>
-
 </body>
 </html>
