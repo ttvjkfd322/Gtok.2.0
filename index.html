@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gtok 🌸 Social Site</title>
 
-  <!-- Trendy Font -->
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Sakura Petals (Optional) -->
+  <!-- Sakura Petals -->
   <script src="https://unpkg.com/sakura-js" defer></script>
   <script>
     window.addEventListener("DOMContentLoaded", () => {
@@ -20,6 +18,13 @@
   </script>
 </head>
 <body>
+
+  <!-- Notification Bar -->
+  <div id="notificationBar">
+    <div class="notif-icon" onclick="showNotifications('likes')">❤️ <span id="likesCount">0</span></div>
+    <div class="notif-icon" onclick="showNotifications('comments')">💬 <span id="commentsCount">0</span></div>
+    <div class="notif-icon" onclick="showNotifications('follows')">➕ <span id="followsCount">0</span></div>
+  </div>
 
   <!-- Header -->
   <header>
