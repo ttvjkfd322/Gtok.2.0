@@ -7,6 +7,15 @@ async function hashPassword(password) {
   return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
+// ========== App Variables ==========
+let users = {};
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+let events = JSON.parse(localStorage.getItem("events")) || [];
+let currentUser = localStorage.getItem("currentUser") || null;
+let currentAvatar = localStorage.getItem("currentAvatar") || "avatar1.png";
+
+const ADMIN_USER = "admin";
+
 // ========== Auto-create Admin Account ==========
 (async () => {
   const savedUsers = JSON.parse(localStorage.getItem("users") || "{}");
@@ -17,18 +26,10 @@ async function hashPassword(password) {
     localStorage.setItem("users", JSON.stringify(savedUsers));
   }
 
-  // After admin setup, load app state
   initApp();
 })();
 
-// ========== App Variables ==========
-let events = JSON.parse(localStorage.getItem("events")) || [];
-let users = {};
-let posts = JSON.parse(localStorage.getItem("posts")) || [];
-let currentUser = localStorage.getItem("currentUser") || null;
-const ADMIN_USER = "admin";
-
-// ========== App Initialization ==========
+// ========== Initialization ==========
 function initApp() {
   users = JSON.parse(localStorage.getItem("users")) || {};
   if (currentUser) showApp();
@@ -38,6 +39,7 @@ function initApp() {
 async function signup() {
   const username = document.getElementById("usernameInput")?.value.trim();
   const password = document.getElementById("passwordInput")?.value;
+  const avatar = document.querySelector('input[name="avatar"]:checked')?.value || "avatar1.png";
 
   if (!username || !password) {
     return displayAuth("Please fill in both fields.");
@@ -50,6 +52,8 @@ async function signup() {
   const hashedPassword = await hashPassword(password);
   users[username] = hashedPassword;
   localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("avatar:" + username, avatar);
+
   displayAuth("✅ Account created. Now log in.");
 }
 
@@ -69,11 +73,30 @@ async function login() {
   if (storedHash === inputHash) {
     currentUser = username;
     localStorage.setItem("currentUser", currentUser);
+
+    // Avatar retrieval
+    currentAvatar = localStorage.getItem("avatar:" + username) || "avatar1.png";
+    localStorage.setItem("currentAvatar", currentAvatar);
+
+    // Welcome modal (session-only)
+    if (!sessionStorage.getItem("welcomed")) {
+      setTimeout(() => {
+        alert(`🎉 Welcome to Gtok, ${username}-senpai!`);
+        sessionStorage.setItem("welcomed", "true");
+      }, 300);
+    }
+
     displayAuth("");
     showApp();
   } else {
     displayAuth("❌ Invalid username or password.");
   }
+}
+
+function logout() {
+  currentUser = null;
+  localStorage.removeItem("currentUser");
+  location.reload();
 }
 
 function displayAuth(msg) {
@@ -169,6 +192,7 @@ function submitPost() {
   const newPost = {
     id: Date.now(),
     author: currentUser,
+    avatar: currentAvatar,
     message: sanitizeText(content),
     timestamp: new Date().toISOString(),
     likes: 0,
@@ -183,12 +207,17 @@ function submitPost() {
 
 function likePost(id) {
   const post = posts.find(p => p.id === id);
-  if (!post || post.likedBy.includes(currentUser)) {
-    return alert("You already liked this post.");
+  if (!post) return;
+
+  const idx = post.likedBy.indexOf(currentUser);
+  if (idx >= 0) {
+    post.likes--;
+    post.likedBy.splice(idx, 1);
+  } else {
+    post.likes++;
+    post.likedBy.push(currentUser);
   }
 
-  post.likes++;
-  post.likedBy.push(currentUser);
   saveAndRender();
 }
 
@@ -234,7 +263,14 @@ function renderPosts(filteredPosts = posts) {
     ).join("");
 
     div.innerHTML = `
-      <strong>${escapeHTML(post.author)}</strong> <small>${dateStr}</small>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+        <img src="${post.avatar}" alt="avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+        <div>
+          <strong>${escapeHTML(post.author)}</strong><br>
+          <small>${dateStr}</small>
+        </div>
+      </div>
+
       <p>${escapeHTML(post.message)}</p>
 
       <button onclick="likePost(${post.id})">❤️ ${post.likes}</button>
@@ -266,4 +302,8 @@ function escapeHTML(str) {
   return str.replace(/[&<>"']/g, m => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[m]));
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("light-theme");
 }
